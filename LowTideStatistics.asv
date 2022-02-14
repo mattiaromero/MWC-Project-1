@@ -12,7 +12,7 @@ close all
 
 % load data
 data = load('lowTide.txt');
-prof = load("prof1018.txt");
+prof = load("prof1018.txt")
 
 % constants
 g = 9.81;                    % acceleration of gravity (m/s^2)
@@ -49,18 +49,14 @@ end
 % ?
 positions = [4478, 4765, 4790, 4814, 4835] %Positions where the sensors are located
 subplot(2,1,1)
+title("Root mean square hight, ")
 plot(positions, Hrms,"or")
-title("Mean of RMS, wave height and H 1/3 ")
-
 hold on
 plot(positions, H13,"*b")
 plot(positions, Hm,"*g") 
-legend(["Hrms","H1/3","Height"])
-xlabel("Position (m)")
+
 
 subplot(2,1,2)
-plot(prof(:,1),prof(:,2),"black")
-title("Depth profile")
-
-xlabel("Position (m)")
+plot(prof(:,1),prof(:,2))
+xlabel("Position")
 ylabel("Elevation (m)")
