@@ -41,8 +41,7 @@ hmean = mean(h);
 t = (linspace(0,D*4*60-1,D*4*60))';
 
 % Plot of the evolution of h as a function of time. 
-figure; %CAREFUL FIX X AXIS to put in in Seconds
-
+figure;
 plot(t,h);
 hold on;
 plot(t,linspace(hmean,hmean,length(t)),'LineWidth',2);
@@ -97,21 +96,17 @@ D = length(lowP1); %34min
 D = D/(2*60); 
 
 tt = (linspace(0,D*2*60-1,D*2*60))'; %new t vector for this section
-%CAREFUL FIX X AXIS to put in in Seconds
+
 subplot(3,2,1)
 plot(tt,lowP1)
 title("Low P1")
 subplot(3,2,2)
 plot(tt,highP1)
-title("High P1")
-
 subplot(3,2,3)
 plot(tt,lowP3)
 title("Low P3")
 subplot(3,2,4)
 plot(tt,highP3)
-title("High P3")
-
 subplot(3,2,5)
 plot(tt,lowP6)
 title("Low P6")
