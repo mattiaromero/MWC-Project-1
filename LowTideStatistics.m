@@ -34,9 +34,9 @@ Hm_tot   = zeros(Npos,1);  % mean wave height (m)
 for i=1:Npos  % loop on the positions
      %Frecuency is equal to 2 because the sampling ratio has aperiod of 0.5sec
     wave = zero_crossing(data(:,i),2);
-    Hrms(i) = rms_height(data(:,i));
-    H13(i) = significant_height(data(:,i));
-    Hm(i) = mean(wave(:,1)); %I DONT KNOW IF THIS IS CORRECT (Idk if by saying the water height they mean the values of the lowtide.txt)!!!!
+    Hrms_tot(i) = rms_height(wave(:,1));
+    H13_tot(i) = significant_height(wave(:,1));
+    Hm_tot(i) = mean(wave(:,1)); %I DONT KNOW IF THIS IS CORRECT (Idk if by saying the water height they mean the values of the lowtide.txt)!!!!
 
 end
 
@@ -49,18 +49,20 @@ end
 % ?
 positions = [4478, 4765, 4790, 4814, 4835] %Positions where the sensors are located
 subplot(2,1,1)
-plot(positions, Hrms,"or")
+plot(positions, Hrms_tot,"or")
 title("Mean of RMS, wave height and H 1/3 ")
 
 hold on
-plot(positions, H13,"*b")
-plot(positions, Hm,"*g") 
+plot(positions, H13_tot,"*b")
+plot(positions, Hm_tot,"*g") 
+xlim([4300,5000])
 legend(["Hrms","H1/3","Height"])
 xlabel("Position (m)")
+ylabel("height (m)")
 
 subplot(2,1,2)
 plot(prof(:,1),prof(:,2),"black")
-xlim([min(prof(:,1)),max(prof(:,1))])
+xlim([4300,5000])
 title("Depth profile")
 
 xlabel("Position (m)")
