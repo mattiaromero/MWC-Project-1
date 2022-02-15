@@ -28,9 +28,9 @@ Npos = 5;                    % number of cross-shore positions considered
 
 % Initialisation vectors 
 % These vectors will be used to store the wave statistics at each position
-Hrms_tot = zeros(Npos,1);  % root mean square height (m)
-H13_tot  = zeros(Npos,1);  % significant wave height (m)
-Hm_tot   = zeros(Npos,1);  % mean wave height (m)
+Hrms_tot = zeros(,1);  % root mean square height (m)
+H13_tot  = zeros(15,1);  % significant wave height (m)
+Hm_tot   = zeros(15,1);  % mean wave height (m)
 
 % --------------------------------------
 %     Computation of wave statistics
@@ -40,9 +40,9 @@ for j=1:3 %loop for low, mid and high tides:
     for i=1:Npos  % loop on the positions
          %Frecuency is equal to 2 because the sampling ratio has a period of 0.5sec
         wave = zero_crossing(data(:,i+(j-1)*5),2)
-        Hrms(i,j) = rms_height(data(:,i+(j-1)*5))
-        H13(i,j) = significant_height(data(:,i+(j-1)*5))
-        Hm(i,j) = mean(wave(:,1)) %I DONT KNOW IF THIS IS CORRECT (Idk if by saying the water height they mean the values of the lowtide.txt)!!!!
+        Hrms_tot(i,j) = rms_height(wave(:,1))
+        H13_tot(i,j) = significant_height(wave(:,1))
+        Hm_tot(i,j) = mean(wave(:,1)) %I DONT KNOW IF THIS IS CORRECT (Idk if by saying the water height they mean the values of the lowtide.txt)!!!!
     
     end
 
@@ -59,7 +59,7 @@ colorp = ["r","b","g"];
 
 
     figure(1)
-    plot(Hrms(:,j),H13(:,j),color(j))
+    plot(Hrms_tot(:,j),H13_tot(:,j),color(j))
     hold on
 
     xlabel("Significant wave height")
@@ -67,7 +67,7 @@ colorp = ["r","b","g"];
     legend("Low tide","Mid tide","High tide")
 end
 for j = 1:3
-    p1(j,:) = polyfit(Hrms(:,j),H13(:,j),1); %in p we store the slope p(1) and the intercept p(2)
+    p1(j,:) = polyfit(Hrms_tot(:,j),H13_tot(:,j),1); %in p we store the slope p(1) and the intercept p(2)
     x1 = linspace(0.1,0.55);
     y1 = polyval(p1(j,:),x1);
     plot(x1,y1,colorp(j))
@@ -75,10 +75,10 @@ for j = 1:3
 
     %Now:  Verify that we have Hm ∼ 0.89Hrms.
     %There are some problems with the Hm
-    p2(j,:) = polyfit(Hm(:,j),Hrms(:,j),1)
-    x1 = linspace(0,0.35); % I am not sure if Hm is what I said
+    p2(j,:) = polyfit(Hm_tot(:,j),Hrms_tot(:,j),1);
+    x1 = linspace(0,1.55); % I am not sure if Hm is what I said
     y1 = polyval(p2(j,:),x1);
-    plot(x1,y1,colorp(j))
+    %plot(x1,y1,colorp(j))
 
 end
 disp(p1)%This is the fit of the significant wave height as a function of the rms wave height %Not that close to sqrt(2) 
