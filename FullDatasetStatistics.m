@@ -38,11 +38,11 @@ Hm_tot   = zeros(Npos,1);  % mean wave height (m)
 
 for j=1:3 %loop for low, mid and high tides:
     for i=1:Npos  % loop on the positions
-         %Frecuency is equal to 2 because the sampling ratio has aperiod of 0.5sec
+         %Frecuency is equal to 2 because the sampling ratio has a period of 0.5sec
         wave = zero_crossing(data(:,i+(j-1)*5),2)
         Hrms(i,j) = rms_height(data(:,i+(j-1)*5))
         H13(i,j) = significant_height(data(:,i+(j-1)*5))
-        Hm(i,j) = mean(data(:,i+(j-1)*5)) %I DONT KNOW IF THIS IS CORRECT (Idk if by saying the water height they mean the values of the lowtide.txt)!!!!
+        Hm(i,j) = mean(wave(:,1)) %I DONT KNOW IF THIS IS CORRECT (Idk if by saying the water height they mean the values of the lowtide.txt)!!!!
     
     end
 
@@ -75,7 +75,7 @@ for j = 1:3
 
     %Now:  Verify that we have Hm ∼ 0.89Hrms.
     %There are some problems with the Hm
-    p2(j,:) = polyfit(Hm(:,j),Hrms(:,j),1)
+    p2(j,:) = polyfit(Hm(:,j),Hrms(:,j),1);
     x1 = linspace(0,0.35); % I am not sure if Hm is what I said
     y1 = polyval(p2(j,:),x1);
     plot(x1,y1,colorp(j))
