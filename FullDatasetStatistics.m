@@ -2,7 +2,7 @@
 % Wave-by-wave analysis of the low tide data, Egmond Coast 3d dataset
 % The objective of the script is to compute wave statistics at different
 % locations along a cross-shore transect and examine their cross-shore
-% evolution..
+% evolution
 
 
 % -------------------------------------
@@ -71,7 +71,7 @@ for j = 1:3
     x1 = linspace(0.35,1.55);
     y1 = polyval(p1(j,:),x1);
     plot(x1,y1,colorp(j))
- 
+
 
     %Now:  Verify that we have Hm ∼ 0.89Hrms.
     %There are some problems with the Hm
