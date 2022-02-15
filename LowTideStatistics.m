@@ -33,10 +33,10 @@ Hm_tot   = zeros(Npos,1);  % mean wave height (m)
 
 for i=1:Npos  % loop on the positions
      %Frecuency is equal to 2 because the sampling ratio has aperiod of 0.5sec
-    wave = zero_crossing(data(:,i),2)
-    Hrms(i) = rms_height(data(:,i))
-    H13(i) = significant_height(data(:,i))
-    Hm(i) = mean(data(:,i)) %I DONT KNOW IF THIS IS CORRECT (Idk if by saying the water height they mean the values of the lowtide.txt)!!!!
+    wave = zero_crossing(data(:,i),2);
+    Hrms(i) = rms_height(data(:,i));
+    H13(i) = significant_height(data(:,i));
+    Hm(i) = mean(wave(:,1)); %I DONT KNOW IF THIS IS CORRECT (Idk if by saying the water height they mean the values of the lowtide.txt)!!!!
 
 end
 
@@ -60,6 +60,7 @@ xlabel("Position (m)")
 
 subplot(2,1,2)
 plot(prof(:,1),prof(:,2),"black")
+xlim([min(prof(:,1)),max(prof(:,1))])
 title("Depth profile")
 
 xlabel("Position (m)")
