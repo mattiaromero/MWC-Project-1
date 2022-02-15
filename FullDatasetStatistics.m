@@ -2,7 +2,7 @@
 % Wave-by-wave analysis of the low tide data, Egmond Coast 3d dataset
 % The objective of the script is to compute wave statistics at different
 % locations along a cross-shore transect and examine their cross-shore
-% evolution.
+% evolution..
 
 
 % -------------------------------------
